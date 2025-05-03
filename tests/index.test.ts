@@ -2,7 +2,7 @@ import fs from "node:fs";
 import { join } from "node:path";
 import type { Browser } from "puppeteer";
 import { jest } from "@jest/globals";
-import { generatePDF, generateSlug, normalizeURL } from "site2pdf/index";
+import { generatePDF, generateSlug, normalizeURL } from "../src/index";
 
 beforeAll(() => {
 	jest.spyOn(console, "log").mockImplementation(() => {});
@@ -39,13 +39,13 @@ describe("generatePDF", () => {
 			browser: mockBrowser,
 			page: await mockBrowser.newPage(),
 		};
-
 		const url = "https://example.com";
 		const urlPattern = new RegExp(`^${url}`);
 		const pdfBuffer = await generatePDF(
 			ctx,
 			url,
 			urlPattern,
+			2, // concurrentLimit
 		);
 
 		expect(pdfBuffer).toBeInstanceOf(Buffer);

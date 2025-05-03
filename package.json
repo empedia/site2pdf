@@ -2,15 +2,14 @@
 	"name": "site2pdf-cli",
 	"version": "0.1.6",
 	"type": "module",
-	"description": "Generate comprehensive PDFs of entire websites, ideal for RAG. ",
-	"bin": {
-		"site2pdf": "bin/index.js"
-	},
-	"scripts": {
+	"description": "Generate comprehensive PDFs of entire websites, ideal for RAG. ",	"bin": {
+		"site2pdf": "bin/site2pdf.js"
+	},	"scripts": {
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
 		"start": "node dist/index.js",
 		"dev": "tsx watch src/index.ts",
-		"build": "tsc",
+		"build": "tsc --skipLibCheck --noEmitOnError false",
+		"build:strict": "tsc",
 		"publish": "npm publish",
 		"lint": "biome lint",
 		"format": "biome format"

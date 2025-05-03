@@ -2,6 +2,5 @@
 
 import { main } from '../dist/index.js';
 
-const [,, mainUrl, urlPattern] = process.argv;
-
-main(mainUrl, urlPattern);
+// Let the main function handle all the argument parsing
+main();
