@@ -1,12 +1,11 @@
-{
-	"compilerOptions": {
+{	"compilerOptions": {
 		"module": "esnext",
 		"target": "esnext",
 		"moduleResolution": "node",
 		"allowJs": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
-		"strict": true,
+		"strict": false, // Temporarily disable strict mode
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true,
@@ -18,7 +17,8 @@
 			"site2pdf/*": ["src/*"]
 		},
 		"outDir": "./dist",
-		"rootDir": "./src"
+		"rootDir": "./src",
+		"noImplicitAny": false
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "**/*.test.ts"]

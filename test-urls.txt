@@ -1,0 +1,3 @@
+https://example.com
+https://invalidwebsitethatdoesnotexist12345.com
+https://github.com

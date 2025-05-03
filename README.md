@@ -32,18 +32,51 @@ sudo apt-get install -y fonts-liberation libappindicator3-1 libatk-bridge2.0-0 l
 ## Usage
 
 ```bash
-npx site2pdf-cli <main_url> [url_pattern]
+npx site2pdf-cli [--url-list <file_path>] [--output <filename>] <main_url> [url_pattern]
 ```
 
 ### Arguments
 
+* `--url-list <file_path>`: Path to a text file containing a list of URLs to process (one URL per line).
+* `--output <filename>`: Specify a custom output filename for the PDF (saved in the "out" directory). The `.pdf` extension will be added automatically if not provided.
 * `<main_url>`: The main URL of the website to be converted to PDF.
 * `[url_pattern]`: Optional regular expression to filter sub-links. Defaults to matching only links within the main URL domain.
 
-### Example
+### URL List File Format
+
+When using the `--url-list` parameter, create a text file with one URL per line. Lines starting with `#` are treated as comments and empty lines are ignored. Example:
+
+```
+# This is a comment
+https://example.com/page1
+https://example.com/page2
+https://example.com/page3
+```
+
+### Examples
+
+#### Crawl Mode
 
 ```bash
 npx site2pdf-cli "https://www.typescriptlang.org/docs/handbook/" "https://www.typescriptlang.org/docs/handbook/2/"
+```
+
+#### URL List Mode
+
+```bash
+# Create a file named urls.txt with your desired URLs
+echo "https://www.typescriptlang.org/docs/handbook/2/basic-types.html
+https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
+https://www.typescriptlang.org/docs/handbook/2/narrowing.html" > urls.txt
+
+# Generate PDF using the URL list
+npx site2pdf-cli --url-list urls.txt "https://www.typescriptlang.org/docs/handbook/"
+
+# Generate PDF with a custom filename (saved to the "out" directory)
+npx site2pdf-cli --output typescript-handbook.pdf "https://www.typescriptlang.org/docs/handbook/"
+
+# Combine both URL list and custom filename
+npx site2pdf-cli --url-list urls.txt --output typescript-selected-pages.pdf "https://www.typescriptlang.org/docs/handbook/"
 ```
 
 ```bash
@@ -62,7 +95,7 @@ Generating PDF for: https://www.typescriptlang.org/docs/handbook/2/types-from-ty
 PDF saved to ./out/www-typescriptlang-org-docs-handbook.pdf
 ```
 
-This command will generate a PDF file named `www.typescriptlang.org-docs-handbook.pdf` containing all pages on the `https://www.typescriptlang.org/docs/handbook/` domain that match the pattern `https://www.typescriptlang.org/docs/handbook/2/`.
+This command will generate a PDF file named `www.typescriptlang.org-docs-handbook.pdf` in the `out` directory containing all pages on the `https://www.typescriptlang.org/docs/handbook/` domain that match the pattern `https://www.typescriptlang.org/docs/handbook/2/`.
 
 ## Troubleshooting for Windows
 
